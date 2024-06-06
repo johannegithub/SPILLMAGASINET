@@ -1,0 +1,244 @@
+
+
+body {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    font-family: "Emilys Candy", serif;
+    color: #000; /* Changed for better contrast */
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.navbar {
+    width: 100%;
+    background-color: purple;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    padding: 30px 0; /* Simplified padding */
+    z-index: 1000;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar ul li {
+    display: inline;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+    color: #ff80ab;
+}
+
+.container {
+    background-color: #cdb4dbff;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+    margin-top: 120px;
+    max-width: 90%;
+    position: relative; /* Add this to ensure z-index works */
+    z-index: 999; /* Updated z-index */
+}
+
+.container:hover {
+    transform: scale(1.05);
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.play-button {
+    background: rgb(236, 157, 10);
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.play-button:hover {
+    background: purple;
+    transform: translateY(-5px);
+}
+
+.extra-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.box {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+    font-size: 1.2em;
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    text-align: center;
+}
+
+.box:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.content-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 100px;
+    flex-wrap: wrap;
+    background-color: lightblue;
+}
+
+.side-box {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background 0.3s ease;
+    font-size: 1.2em;
+    flex: 1;
+    margin: 20px;
+    height: fit-content;
+    min-width: 250px;
+    max-width: 300px;
+    background: #bde0feff;
+}
+
+#candycrush {
+    width:100% ; /* Ensures the image takes up the full width of its container */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Ensures no extra space below the image */
+}
+
+.img.candycrush {
+    height: 20px;
+    width: 70px;
+}
+
+.side-box:hover {
+    transform: translateY(-5px);
+    background: #bde0feff;
+}
+
+.left-box {
+    margin-right: 10px;
+}
+
+.right-box {
+    margin-left: 10px;
+}
+
+.main-content {
+    flex: 2;
+    background-color: purple;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background 0.3s ease;
+    max-width: 90%;
+    width: 800px;
+    color: white;
+}
+
+footer {
+    background: #bde0feff;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-size: 1em;
+    box-sizing: border-box;
+    margin-top: 50px;
+}
+
+.footerbilde {
+    position: absolute;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.container.img {
+    width:50px;
+    height:10px;
+}
+
+/* Cookies */
+.cookie-consent {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    z-index: 1000; /* Updated z-index */
+}
+
+.cookie-consent-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#acceptCookies,
+#declineCookies {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#acceptCookies:hover,
+#declineCookies:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
