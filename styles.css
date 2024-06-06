@@ -1,7 +1,7 @@
 
 
 body {
-    background-color: white;
+    background-color: rgb(254, 149, 108);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -81,7 +81,7 @@ p {
 }
 
 .play-button {
-    background: rgb(236, 157, 10);
+    background: rgb(254, 149, 108);
     color: white;
     padding: 15px 30px;
     font-size: 1.2em;
@@ -133,7 +133,7 @@ p {
     box-sizing: border-box;
     margin-top: 100px;
     flex-wrap: wrap;
-    background-color: lightblue;
+    background-color:white;
 }
 
 .side-box {
@@ -147,7 +147,7 @@ p {
     height: fit-content;
     min-width: 250px;
     max-width: 300px;
-    background: #bde0feff;
+    background: white;
 }
 
 #candycrush {
@@ -163,7 +163,7 @@ p {
 
 .side-box:hover {
     transform: translateY(-5px);
-    background: #bde0feff;
+    background: white;
 }
 
 .left-box {
