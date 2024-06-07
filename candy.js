@@ -1,12 +1,11 @@
 
 const candies = ["Blue", "Orange", "Green", "Yellow", "Red", "Purple"];
-let board = [];
 const rows = 9;
 const columns = 9;
 let score = 0;
-
 let currTile;
 let otherTile;
+let board = [];
 
 window.onload = function () {
     score = 0; // Initializing score to 0
@@ -53,7 +52,6 @@ function startGame() {
         }
         board.push(row);
     }
-
     console.log(board);
 }
 
@@ -122,7 +120,6 @@ function crushCandy() {
     //crushFour();
     crushThree();
     document.getElementById("score").innerText = score;
-
 }
 
 function crushThree() {
@@ -181,7 +178,6 @@ function checkValid() {
             }
         }
     }
-
     return false;
 }
 
@@ -194,7 +190,6 @@ function slideCandy() {
                 ind -= 1;
             }
         }
-
         for (let r = ind; r >= 0; r--) {
             board[r][c].src = "./images/blank.png";
         }
