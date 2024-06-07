@@ -111,6 +111,20 @@ p {
     background: rgba(255, 255, 255, 0.3);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 body {
     background: url("./images/background.jpg") no-repeat center center fixed;
     background-size: cover;
@@ -170,14 +184,3 @@ h1 {
 .navbar ul li a:hover {
     color: #ff80ab;
 }
-
-button {
-    background: #ff4081;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1em;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px;
-    transition: background 0.3s ease, transform 0.3s ease;
