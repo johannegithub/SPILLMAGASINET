@@ -1,11 +1,10 @@
-var candies = ["Blue", "Orange", "Green", "Yellow", "Red", "Purple"];
-var board = [];
-var rows = 9;
-var columns = 9;
-var score = 0;
-
-var currTile;
-var otherTile;
+const candies = ["Blue", "Orange", "Green", "Yellow", "Red", "Purple"];
+let board = [];
+const rows = 9;
+const columns = 9;
+let score = 0;
+let currTile;
+let otherTile;
 
 
 window.onload = function() {
@@ -25,10 +24,10 @@ function randomCandy() {
 
 function startGame() {
     for (let r = 0; r < rows; r++) {
-        let row = [];
+        const row = [];
         for (let c = 0; c < columns; c++) {
             // <img id="0-0" src="./images/Red.png">
-            let tile = document.createElement("img");
+            const tile = document.createElement("img");
             tile.id = r.toString() + "-" + c.toString();
             tile.src = "./images/" + randomCandy() + ".png";
 
@@ -78,32 +77,32 @@ function dragEnd() {
         return;
     }
 
-    let currCoords = currTile.id.split("-"); // id="0-0" -> ["0", "0"]
-    let r = parseInt(currCoords[0]);
-    let c = parseInt(currCoords[1]);
+    const currCoords = currTile.id.split("-"); // id="0-0" -> ["0", "0"]
+    const r = parseInt(currCoords[0]);
+    const c = parseInt(currCoords[1]);
 
-    let otherCoords = otherTile.id.split("-");
-    let r2 = parseInt(otherCoords[0]);
-    let c2 = parseInt(otherCoords[1]);
+    const otherCoords = otherTile.id.split("-");
+    const r2 = parseInt(otherCoords[0]);
+    const c2 = parseInt(otherCoords[1]);
 
-    let moveLeft = c2 == c-1 && r == r2;
-    let moveRight = c2 == c+1 && r == r2;
+    const moveLeft = c2 == c-1 && r == r2;
+    const moveRight = c2 == c+1 && r == r2;
 
-    let moveUp = r2 == r-1 && c == c2;
-    let moveDown = r2 == r+1 && c == c2;
+    const moveUp = r2 == r-1 && c == c2;
+    const moveDown = r2 == r+1 && c == c2;
 
-    let isAdjacent = moveLeft || moveRight || moveUp || moveDown;
+    const isAdjacent = moveLeft || moveRight || moveUp || moveDown;
 
     if (isAdjacent) {
-        let currImg = currTile.src;
-        let otherImg = otherTile.src;
+        const currImg = currTile.src;
+        const otherImg = otherTile.src;
         currTile.src = otherImg;
         otherTile.src = currImg;
 
-        let validMove = checkValid();
+        const validMove = checkValid();
         if (!validMove) {
-            let currImg = currTile.src;
-            let otherImg = otherTile.src;
+            const currImg = currTile.src;
+            const otherImg = otherTile.src;
             currTile.src = otherImg;
             otherTile.src = currImg;    
         }
@@ -122,9 +121,9 @@ function crushThree() {
     //check rows
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < columns-2; c++) {
-            let candy1 = board[r][c];
-            let candy2 = board[r][c+1];
-            let candy3 = board[r][c+2];
+            const candy1 = board[r][c];
+            const candy2 = board[r][c+1];
+            const candy3 = board[r][c+2];
             if (candy1.src == candy2.src && candy2.src == candy3.src && !candy1.src.includes("blank")) {
                 candy1.src = "./images/blank.png";
                 candy2.src = "./images/blank.png";
@@ -137,9 +136,9 @@ function crushThree() {
     //check columns
     for (let c = 0; c < columns; c++) {
         for (let r = 0; r < rows-2; r++) {
-            let candy1 = board[r][c];
-            let candy2 = board[r+1][c];
-            let candy3 = board[r+2][c];
+            const candy1 = board[r][c];
+            const candy2 = board[r+1][c];
+            const candy3 = board[r+2][c];
             if (candy1.src == candy2.src && candy2.src == candy3.src && !candy1.src.includes("blank")) {
                 candy1.src = "./images/blank.png";
                 candy2.src = "./images/blank.png";
@@ -154,9 +153,9 @@ function checkValid() {
     //check rows
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < columns-2; c++) {
-            let candy1 = board[r][c];
-            let candy2 = board[r][c+1];
-            let candy3 = board[r][c+2];
+            const candy1 = board[r][c];
+            const candy2 = board[r][c+1];
+            const candy3 = board[r][c+2];
             if (candy1.src == candy2.src && candy2.src == candy3.src && !candy1.src.includes("blank")) {
                 return true;
             }
@@ -166,9 +165,9 @@ function checkValid() {
     //check columns
     for (let c = 0; c < columns; c++) {
         for (let r = 0; r < rows-2; r++) {
-            let candy1 = board[r][c];
-            let candy2 = board[r+1][c];
-            let candy3 = board[r+2][c];
+            const candy1 = board[r][c];
+            const candy2 = board[r+1][c];
+            const candy3 = board[r+2][c];
             if (candy1.src == candy2.src && candy2.src == candy3.src && !candy1.src.includes("blank")) {
                 return true;
             }
