@@ -1,5 +1,4 @@
-
-  document.addEventListener('DOMContentLoaded', () => {
+   document.addEventListener('DOMContentLoaded', () => {
     const boxes = document.querySelectorAll('.box');
 
     boxes.forEach(box => {
