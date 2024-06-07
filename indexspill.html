@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="candy.css">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap" rel="stylesheet">
-    <script src="candy.js"></script>
+    <script src="candy.js" defer></script>
 </head>
 
 <body>
@@ -21,6 +21,14 @@
     </nav>
     <h1>Score: <span id="score">0</span></h1>
     <div id="board"></div>
+
+    <!-- Bakgrunnsmusikk -->
+    <audio id="background-music" src="audio/background-music.mp3" autoplay loop>
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Musikk-kontroller -->
+    <button id="toggle-music">Pause Music</button>
 </body>
 
 </html>
