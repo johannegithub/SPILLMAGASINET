@@ -26,7 +26,6 @@ function randomCandy() {
 function startGame() {
     score = 0; // Reset score to 0
     document.getElementById("score").innerText = score; // Update the score display
-
     // Rest of your existing code to generate the game board...
 }
 
