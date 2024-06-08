@@ -1,4 +1,3 @@
-
 const candies = ["Blue", "Orange", "Green", "Yellow", "Red", "Purple"];
 const rows = 9;
 const columns = 9;
@@ -8,32 +7,33 @@ let otherTile;
 let board = [];
 
 window.onload = function () {
-    score = 0; // Initializing score to 0
     startGame();
 
     //1/10th of a second
-    window.setInterval(function () {
-        crushCandy();
-        slideCandy();
-        generateCandy();
-    }, 100);
+    setTimeout(function () {
+        window.setInterval(function () {
+            crushCandy();
+            slideCandy();
+            generateCandy();
+        }, 100);
+    }, 1000); // Legger til en forsinkelse på 1 sekund
+
+    loadHighScore();
 }
 
 function randomCandy() {
     return candies[Math.floor(Math.random() * candies.length)]; //0 - 5.99
 }
-
 function startGame() {
     score = 0; // Reset score to 0
     document.getElementById("score").innerText = score; // Update the score display
-    // Rest of your existing code to generate the game board...
-}
+    board = []; // Clear the board array
+    document.getElementById("board").innerHTML = ""; // Clear the board display
 
-function startGame() {
+    // Generating the game board
     for (let r = 0; r < rows; r++) {
         const row = [];
         for (let c = 0; c < columns; c++) {
-            // <img id="0-0" src="./images/Red.png">
             const tile = document.createElement("img");
             tile.id = r.toString() + "-" + c.toString();
             tile.src = "./images/" + randomCandy() + ".png";
@@ -51,8 +51,50 @@ function startGame() {
         }
         board.push(row);
     }
+
+    removeInitialMatches();
+
     console.log(board);
 }
+
+function removeInitialMatches() {
+    let initialMatches = true;
+    while (initialMatches) {
+        initialMatches = false;
+
+        // Check for rows with three same candies
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < columns - 2; c++) {
+                const candy1 = board[r][c];
+                const candy2 = board[r][c + 1];
+                const candy3 = board[r][c + 2];
+                if (candy1.src == candy2.src && candy2.src == candy3.src) {
+                    candy1.src = "./images/" + randomCandy() + ".png";
+                    candy2.src = "./images/" + randomCandy() + ".png";
+                    candy3.src = "./images/" + randomCandy() + ".png";
+                    initialMatches = true;
+                }
+            }
+        }
+
+        // Check for columns with three same candies
+        for (let c = 0; c < columns; c++) {
+            for (let r = 0; r < rows - 2; r++) {
+                const candy1 = board[r][c];
+                const candy2 = board[r + 1][c];
+                const candy3 = board[r + 2][c];
+                if (candy1.src == candy2.src && candy2.src == candy3.src) {
+                    candy1.src = "./images/" + randomCandy() + ".png";
+                    candy2.src = "./images/" + randomCandy() + ".png";
+                    candy3.src = "./images/" + randomCandy() + ".png";
+                    initialMatches = true;
+                }
+            }
+        }
+    }
+}
+
+
 
 function dragStart() {
     //this refers to tile that was clicked on for dragging
@@ -68,7 +110,6 @@ function dragEnter(e) {
 }
 
 function dragLeave() {
-
 }
 
 function dragDrop() {
@@ -77,7 +118,6 @@ function dragDrop() {
 }
 
 function dragEnd() {
-
     if (currTile.src.includes("blank") || otherTile.src.includes("blank")) {
         return;
     }
