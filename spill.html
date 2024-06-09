@@ -22,9 +22,10 @@
         </ul>
     </nav>
 
-    <h3>Highscore: <span id="highscoreValue">0</span></h3>
-    
-    <h4>Moves Left: <span id="movesLeft">12</span></h4>
+    <div id="scoreContainer">
+        <h3>Highscore: <span id="highscoreValue">0</span></h3>
+        <h3>Trekk igjen: <span id="movesLeft">12</span></h3>
+    </div>
 
     <h1>Score: <span id="score">0</span></h1>
 
@@ -40,7 +41,7 @@
     <audio id="backgroundMusic" loop>
         <source src="musikk/happymusic.mp3" type="audio/mpeg">
     </audio>
-    <button id="gameOverButton" onclick="endGame()" style="display: none;">Game Over</button>
+    <button id="gameOverButton" onclick="endGame()" style="display: none;">GAME OVER</button>
     
     <!-- Restart Button -->
     <button id="restartButton" onclick="restartGame()" style="display: none;">Start spillet på nytt</button>
