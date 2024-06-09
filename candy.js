@@ -1,4 +1,4 @@
-const candies = ["Blue", "Orange", "Green", "Yellow", "Red", "Purple"];
+const candies = ["Blue", "Orange", "Green", "yellow", "red", "Purple"];
 const rows = 9;
 const columns = 9;
 let score = 0;
