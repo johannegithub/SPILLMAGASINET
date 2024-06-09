@@ -38,12 +38,15 @@ function getCookie(cname) {
     return "";
 }
 
+
+
 function checkCookie() {
     let cookiesAccepted = getCookie("cookiesAccepted");
-    const cookieConsent = document.getElementById('cookieConsent');
     if (cookiesAccepted === "true") {
-        cookieConsent.style.transform = 'translateY(100%)';
+        setTimeout(() => {
+            document.getElementById('cookieConsent').style.transform = 'translateY(100%)';
+        }, 20000); // 20000 milliseconds = 20 seconds delay
     } else if (cookiesAccepted === "false" || cookiesAccepted === "") {
-        cookieConsent.style.transform = 'translateY(0)';
+        document.getElementById('cookieConsent').style.transform = 'translateY(0)';
     }
 }
