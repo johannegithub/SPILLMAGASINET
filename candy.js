@@ -23,8 +23,10 @@ window.onload = function () {
 }
 
 function randomCandy() {
-    return candies[Math.floor(Math.random() * candies.length)]; //0 - 5.99
+    return candies[Math.floor(Math.random() * candies.length)];
 }
+
+// Generer spillbrettet med lazy loading
 function startGame() {
     score = 0;
     document.getElementById("score").innerText = score;
@@ -35,23 +37,20 @@ function startGame() {
         gameActive = true;
     }
 
-    // Tømmer brettet hvis det allerede eksisterer
     const boardElement = document.getElementById("board");
     boardElement.innerHTML = "";
-
     board = [];
 
-    // Generer spillbrettet
     for (let r = 0; r < rows; r++) {
         const row = [];
         for (let c = 0; c < columns; c++) {
             const tile = document.createElement("img");
             tile.id = r.toString() + "-" + c.toString();
             tile.src = "./images/" + randomCandy() + ".png";
+            tile.loading = "lazy";  // Lazy loading av bilder
             tile.classList.add("tile");
 
             if (gameActive) {
-                // Drag-funksjonalitet
                 tile.addEventListener("dragstart", dragStart);
                 tile.addEventListener("dragover", dragOver);
                 tile.addEventListener("dragenter", dragEnter);
