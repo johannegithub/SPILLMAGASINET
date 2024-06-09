@@ -1,4 +1,4 @@
-const candies = ["blue", "orange", "green", "yellow", "red", "Purple"];
+const candies = ["Blue", "Orange", "Green", "Yellow", "Red", "Purple"];
 const rows = 9;
 const columns = 9;
 let score = 0;
@@ -104,8 +104,6 @@ function removeInitialMatches() {
         }
     }
 }
-
-
 
 function dragStart() {
     //this refers to tile that was clicked on for dragging
