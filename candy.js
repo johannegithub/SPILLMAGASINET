@@ -25,47 +25,48 @@ window.onload = function () {
 function randomCandy() {
     return candies[Math.floor(Math.random() * candies.length)]; //0 - 5.99
 }
-
 function startGame() {
-    score = 0; // Reset score to 0
-    document.getElementById("score").innerText = score; // Update the score display
-    
-    movesLeft = 12; // Reset number of moves
-    document.getElementById("movesLeft").innerText = movesLeft; // Update moves display
+    score = 0;
+    document.getElementById("score").innerText = score;
+    movesLeft = 12;
+    document.getElementById("movesLeft").innerText = movesLeft;
 
-    // Check if game is active, if not, set it to active
     if (!gameActive) {
         gameActive = true;
     }
 
-    // If the board is empty, generate it
-    if (board.length === 0) {
-        // Generating the game board
-        for (let r = 0; r < rows; r++) {
-            const row = [];
-            for (let c = 0; c < columns; c++) {
-                const tile = document.createElement("img");
-                tile.id = r.toString() + "-" + c.toString();
-                tile.src = "./images/" + randomCandy() + ".png";
+    // Tømmer brettet hvis det allerede eksisterer
+    const boardElement = document.getElementById("board");
+    boardElement.innerHTML = "";
 
-                if (gameActive) {
-                    //DRAG FUNCTIONALITY
-                    tile.addEventListener("dragstart", dragStart);
-                    tile.addEventListener("dragover", dragOver);
-                    tile.addEventListener("dragenter", dragEnter);
-                    tile.addEventListener("dragleave", dragLeave);
-                    tile.addEventListener("drop", dragDrop);
-                    tile.addEventListener("dragend", dragEnd);
+    board = [];
 
-                    document.getElementById("board").append(tile);
-                    row.push(tile);
-                }
+    // Generer spillbrettet
+    for (let r = 0; r < rows; r++) {
+        const row = [];
+        for (let c = 0; c < columns; c++) {
+            const tile = document.createElement("img");
+            tile.id = r.toString() + "-" + c.toString();
+            tile.src = "./images/" + randomCandy() + ".png";
+            tile.classList.add("tile");
+
+            if (gameActive) {
+                // Drag-funksjonalitet
+                tile.addEventListener("dragstart", dragStart);
+                tile.addEventListener("dragover", dragOver);
+                tile.addEventListener("dragenter", dragEnter);
+                tile.addEventListener("dragleave", dragLeave);
+                tile.addEventListener("drop", dragDrop);
+                tile.addEventListener("dragend", dragEnd);
             }
-            board.push(row);
-        }
 
-        removeInitialMatches();
+            boardElement.appendChild(tile);
+            row.push(tile);
+        }
+        board.push(row);
     }
+
+    removeInitialMatches();
 }
 
 function removeInitialMatches() {
