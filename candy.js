@@ -373,8 +373,8 @@ function restartGame() {
     document.getElementById("restartButton").style.display = "none";
 
     // Tilbakestiller antall trekk og score til standardverdier
-    movesLeft = 12; 
-    document.getElementById("movesLeft").innerText = movesLeft; 
+    movesLeft = 12;
+    document.getElementById("movesLeft").innerText = movesLeft;
     score = 0;
     document.getElementById("score").innerText = score;
 

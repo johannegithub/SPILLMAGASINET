@@ -1,34 +1,32 @@
-   document.addEventListener('DOMContentLoaded', () => {
-    const boxes = document.querySelectorAll('.box');
+document.addEventListener('DOMContentLoaded', () => {
+    const acceptButton = document.getElementById('acceptCookies');
+    const declineButton = document.getElementById('declineCookies');
+    const cookieConsent = document.getElementById('cookieConsent');
 
-    boxes.forEach(box => {
-        box.addEventListener('click', () => {
-            alert(`Du klikket på ${box.innerText}`);
-        });
-    });
-
-    document.getElementById('acceptCookies').addEventListener('click', () => {
+    acceptButton.addEventListener('click', () => {
         setCookie('cookiesAccepted', true, 365);
-        document.getElementById('cookieConsent').style.transform = 'translateY(100%)';
+        cookieConsent.style.transform = 'translateY(100%)';
     });
 
-    document.getElementById('declineCookies').addEventListener('click', () => {
+    declineButton.addEventListener('click', () => {
         setCookie('cookiesAccepted', false, 365);
-        document.getElementById('cookieConsent').style.transform = 'translateY(100%)';
+        cookieConsent.style.transform = 'translateY(100%)';
     });
+
+    checkCookie();
 });
 
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    let expires = "expires="+d.toUTCString();
+    let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 function getCookie(cname) {
     let name = cname + "=";
     let ca = document.cookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
+    for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
@@ -42,9 +40,10 @@ function getCookie(cname) {
 
 function checkCookie() {
     let cookiesAccepted = getCookie("cookiesAccepted");
+    const cookieConsent = document.getElementById('cookieConsent');
     if (cookiesAccepted === "true") {
-        document.getElementById('cookieConsent').style.transform = 'translateY(100%)';
+        cookieConsent.style.transform = 'translateY(100%)';
     } else if (cookiesAccepted === "false" || cookiesAccepted === "") {
-        document.getElementById('cookieConsent').style.transform = 'translateY(0)';
+        cookieConsent.style.transform = 'translateY(0)';
     }
 }
