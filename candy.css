@@ -7,7 +7,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Emilys Candy", serif;
     color: #fff;
     text-align: center;
     overflow: hidden;
@@ -69,7 +69,6 @@ h1 {
 p {
     font-size: 1.5em;
     margin-bottom: 30px;
-    font-family: 'Roboto', sans-serif;
 }
 
 .play-button {
@@ -112,23 +111,9 @@ p {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 body {
     background: url("./images/background.jpg") no-repeat center center fixed;
     background-size: cover;
-    font-family: Arial, Helvetica, sans-serif;
     color: white;
     text-align: center;
 }
@@ -183,4 +168,77 @@ h1 {
 
 .navbar ul li a:hover {
     color: #ff80ab;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+button {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: "Emilys Candy", serif;
+}
+
+button:hover {
+    background-color: purple;
+}
+
+.knapper {
+    font-family: "Emilys Candy", serif;
+    margin-top: 30px;
+    text-align: center;
+    background:  #cdb4dbff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 30px;
+}
+
+h3 {
+    font-size: 20px;
+    margin-top: 100px;
+    margin-bottom: -120px;
+    margin-right: 700px
+}
+h4{
+    font-size: 20px;
+    margin-top: 80px;
+    margin-bottom: -120px;
+    margin-right: 700px
+}
+
+.gameOverButton {
+    font-size: 100px;
+    margin-top: 30px;
+
+}
+
+#restartButton {
+    position: absolute;
+    top: calc(50% - 30px);
+    left: calc(50% - 50px);
+    z-index: 9999; /* Ensure the button appears on top of the game board */
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: "Emilys Candy", serif;
+    align-items: center;
+}
+
+#restartButton:hover {
+    background-color: purple;
 }

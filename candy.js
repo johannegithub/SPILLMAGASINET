@@ -5,8 +5,10 @@ let score = 0;
 let currTile;
 let otherTile;
 let board = [];
+let gameActive = true;
 
 window.onload = function () {
+    loadHighScore();
     startGame();
 
     //1/10th of a second
@@ -15,46 +17,55 @@ window.onload = function () {
             crushCandy();
             slideCandy();
             generateCandy();
+            saveHighScore(); // Lagrer highscore
         }, 100);
     }, 1000); // Legger til en forsinkelse på 1 sekund
-
-    loadHighScore();
 }
 
 function randomCandy() {
     return candies[Math.floor(Math.random() * candies.length)]; //0 - 5.99
 }
+
 function startGame() {
     score = 0; // Reset score to 0
     document.getElementById("score").innerText = score; // Update the score display
-    board = []; // Clear the board array
-    document.getElementById("board").innerHTML = ""; // Clear the board display
+    
+    movesLeft = 12; // Reset number of moves
+    document.getElementById("movesLeft").innerText = movesLeft; // Update moves display
 
-    // Generating the game board
-    for (let r = 0; r < rows; r++) {
-        const row = [];
-        for (let c = 0; c < columns; c++) {
-            const tile = document.createElement("img");
-            tile.id = r.toString() + "-" + c.toString();
-            tile.src = "./images/" + randomCandy() + ".png";
-
-            //DRAG FUNCTIONALITY
-            tile.addEventListener("dragstart", dragStart); //click on a candy, initialize drag process
-            tile.addEventListener("dragover", dragOver);  //clicking on candy, moving mouse to drag the candy
-            tile.addEventListener("dragenter", dragEnter); //dragging candy onto another candy
-            tile.addEventListener("dragleave", dragLeave); //leave candy over another candy
-            tile.addEventListener("drop", dragDrop); //dropping a candy over another candy
-            tile.addEventListener("dragend", dragEnd); //after drag process completed, we swap candies
-
-            document.getElementById("board").append(tile);
-            row.push(tile);
-        }
-        board.push(row);
+    // Check if game is active, if not, set it to active
+    if (!gameActive) {
+        gameActive = true;
     }
 
-    removeInitialMatches();
+    // If the board is empty, generate it
+    if (board.length === 0) {
+        // Generating the game board
+        for (let r = 0; r < rows; r++) {
+            const row = [];
+            for (let c = 0; c < columns; c++) {
+                const tile = document.createElement("img");
+                tile.id = r.toString() + "-" + c.toString();
+                tile.src = "./images/" + randomCandy() + ".png";
 
-    console.log(board);
+                if (gameActive) {
+                    //DRAG FUNCTIONALITY
+                    tile.addEventListener("dragstart", dragStart);
+                    tile.addEventListener("dragover", dragOver);
+                    tile.addEventListener("dragenter", dragEnter);
+                    tile.addEventListener("dragleave", dragLeave);
+                    tile.addEventListener("drop", dragDrop);
+                    tile.addEventListener("dragend", dragEnd);
+
+                    document.getElementById("board").append(tile);
+                    row.push(tile);
+                }
+            }
+            board.push(row);
+        }
+
+        removeInitialMatches();
+    }
 }
 
 function removeInitialMatches() {
@@ -241,4 +252,133 @@ function generateCandy() {
             board[0][c].src = "./images/" + randomCandy() + ".png";
         }
     }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const music = document.getElementById('backgroundMusic');
+    const playButton = document.getElementById('playButton');
+    const pauseButton = document.getElementById('pauseButton');
+
+    playButton.addEventListener('click', () => {
+        music.play();
+    });
+
+    pauseButton.addEventListener('click', () => {
+        music.pause();
+    });
+});
+
+let highscore = 0; // Legg til denne linjen for å initialisere highscore
+
+function loadHighScore() {
+    const savedHighscore = localStorage.getItem("highscore");
+    if (savedHighscore !== null) {
+        highscore = parseInt(savedHighscore); // Oppdaterer highscore
+        document.getElementById("highscoreValue").innerText = highscore;
+    }
+}
+
+function saveHighScore() {
+    if (score > highscore) {
+        highscore = score;
+        localStorage.setItem("highscore", highscore);
+        document.getElementById("highscoreValue").innerText = highscore;
+    }
+}
+
+window.onload = function () {
+    loadHighScore();
+    startGame();
+
+    //1/10th of a second
+    setTimeout(function () {
+        window.setInterval(function () {
+            crushCandy();
+            slideCandy();
+            generateCandy();
+            saveHighScore(); // Lagrer highscore
+        }, 100);
+    }, 1000); // Legger til en forsinkelse på 1 sekund
+}
+
+let movesLeft = 12; // Legg til denne linjen for å spore antall trekk
+
+function dragEnd() {
+    if (currTile.src.includes("blank") || otherTile.src.includes("blank")) {
+        return;
+    }
+
+    const currCoords = currTile.id.split("-"); // id="0-0" -> ["0", "0"]
+    const r = parseInt(currCoords[0]);
+    const c = parseInt(currCoords[1]);
+
+    const otherCoords = otherTile.id.split("-");
+    const r2 = parseInt(otherCoords[0]);
+    const c2 = parseInt(otherCoords[1]);
+
+    const moveLeft = c2 == c - 1 && r == r2;
+    const moveRight = c2 == c + 1 && r == r2;
+
+    const moveUp = r2 == r - 1 && c == c2;
+    const moveDown = r2 == r + 1 && c == c2;
+
+    const isAdjacent = moveLeft || moveRight || moveUp || moveDown;
+
+    if (isAdjacent) {
+        const currImg = currTile.src;
+        const otherImg = otherTile.src;
+        currTile.src = otherImg;
+        otherTile.src = currImg;
+
+        const validMove = checkValid();
+        if (!validMove) {
+            const currImg = currTile.src;
+            const otherImg = otherTile.src;
+            currTile.src = otherImg;
+            otherTile.src = currImg;
+        } else {
+            moveMade(); // Øker telleren for trekk
+        }
+    }
+}
+
+function moveMade() {
+    movesLeft--;
+    document.getElementById("movesLeft").innerText = movesLeft; // Oppdaterer antall trekk på skjermen
+
+    if (movesLeft <= 0) {
+        endGame(); // Kall endGame() hvis antall trekk er 0 eller mindre
+    }
+}
+
+function endGame() {
+    // Implementer logikken for hva som skal skje når spillet er over
+    document.getElementById("gameOverButton").style.display = "block"; // Viser knappen "GAME OVER"
+    document.getElementById("restartButton").style.display = "block"; // Viser restartknappen
+    movesLeft = 0; // Sett antall trekk til 0 for å unngå negative verdier
+    gameActive = false; // Setter spillet som inaktivt
+
+    // Deaktiver dra- og slippfunksjonalitet
+    document.querySelectorAll(".tile").forEach(tile => {
+        tile.removeEventListener("dragstart", dragStart);
+        tile.removeEventListener("dragover", dragOver);
+        tile.removeEventListener("dragenter", dragEnter);
+        tile.removeEventListener("dragleave", dragLeave);
+        tile.removeEventListener("drop", dragDrop);
+        tile.removeEventListener("dragend", dragEnd);
+    });
+}
+
+function restartGame() {
+    // Gjemmer knappen "GAME OVER" og restartknappen
+    document.getElementById("gameOverButton").style.display = "none";
+    document.getElementById("restartButton").style.display = "none";
+
+    // Tilbakestiller antall trekk og score til standardverdier
+    movesLeft = 12; 
+    document.getElementById("movesLeft").innerText = movesLeft; 
+    score = 0;
+    document.getElementById("score").innerText = score;
+
+    // Starter ikke spillet på nytt, bare tilbakestiller score og antall trekk
 }

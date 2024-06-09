@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="candy.css">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <script src="candy.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
-<body>r
+<body>
     <nav class="navbar">
         <ul>
             <li><a href="index.html">SpillMagasinet</a></li>
@@ -19,9 +21,32 @@
             <li><a href="https://www.spillespill.no">Flere spill</a></li>
         </ul>
     </nav>
+
+    <h3>Highscore: <span id="highscoreValue">0</span></h3>
+    
+    <h4>Moves Left: <span id="movesLeft">12</span></h4>
+
     <h1>Score: <span id="score">0</span></h1>
+
     <div id="board"></div>
+    
+    <div class="knapper">
+        <div class="buttons">
+            <button id="playButton">Spill musikk</button>
+            <button id="pauseButton">Pause musikk</button>
+        </div>
+    </div>
+
+    <audio id="backgroundMusic" loop>
+        <source src="musikk/happymusic.mp3" type="audio/mpeg">
+    </audio>
+    <button id="gameOverButton" onclick="endGame()" style="display: none;">Game Over</button>
+    
+    <!-- Restart Button -->
+    <button id="restartButton" onclick="restartGame()" style="display: none;">Start spillet på nytt</button>
+    
 
 </body>
-
 </html>
+
+
